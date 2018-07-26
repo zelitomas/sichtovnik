@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import NotImplementedSnackbar from './Snackbar';
 
 const styles = {
     root: {
@@ -21,23 +22,50 @@ const styles = {
     },
 };
 
-function ButtonAppBar(props) {
-    const { classes } = props;
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="title" color="inherit" className={classes.flex}>
-                        {props.name}
-                    </Typography>
-                    <Button color="inherit">Přihlásit se</Button>
-                </Toolbar>
-            </AppBar>
-        </div>
-    );
+class ButtonAppBar extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            snackOpen: false
+        }
+    }
+
+    openSnack(){
+        this.setState({
+            snackOpen: true
+        });
+        console.log("There");
+    }
+
+    handleSnackBarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({ snackOpen: false });
+    };
+
+    render(){
+
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={() => {this.openSnack()}}>
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="title" color="inherit" className={classes.flex}>
+                            {this.props.name}
+                        </Typography>
+                        <Button color="inherit" onClick={() => {this.openSnack()}}>Přihlásit se</Button>
+                    </Toolbar>
+                </AppBar>
+                <NotImplementedSnackbar open={this.state.snackOpen} onClose={this.handleSnackBarClose}/>
+            </div>
+        );
+    }
 }
 
 ButtonAppBar.propTypes = {

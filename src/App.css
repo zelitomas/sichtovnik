@@ -8,8 +8,6 @@
     padding: 5px;
     display: inline-grid;
     border: solid var(--color) 1px;
-    background-color: var(--color);
-    color: aliceblue;
     margin: 2px;
     grid-template-areas: "header"
                          "."
@@ -31,7 +29,7 @@
     left: 0;
     right: 0;
     z-index: -1;
-    box-shadow: 1px 1px 16px 0px rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 16px 0 rgba(0,0,0,0.5);
 }
 
 
@@ -48,15 +46,20 @@
     z-index: -2;
 }
 
-.Day:hover{
+.Day:hover, .Day.highlight{
     background-color: var(--color);
-    z-index: 2;
+
     color: aliceblue;
 }
 
 .Day:hover {
+    z-index: 2;
     transform: scale(1.1, 1.1);
+}
 
+.Day.highlight {
+    z-index: 3;
+    transform: scale(1.15, 1.15);
 }
 
 .DayNumber {

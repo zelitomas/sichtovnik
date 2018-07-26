@@ -16,8 +16,10 @@ class Day extends Component {
     render(){
 
         let className = "Day";
-        if(!this.props.active){
+        if(!this.props.active) {
             className = className + " disabled";
+        } else if (this.props.highlight) {
+            className = className + " highlight";
         }
 
         return(
@@ -36,6 +38,10 @@ function getSichta(date, days, offset){
     let dayInWeek = Math.floor(date.getTime() / (1000 * 3600 * 24));
     dayInWeek = (dayInWeek + offset) % days;
     return dayInWeek;
+}
+
+function normalizeDate(date){
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
 }
 
 let sichtyVSE = ["ABC", "ABC", "DAB", "DAB", "CDA", "CDA", "BCD", "BCD"];
@@ -58,14 +64,14 @@ class Calendar extends Component{
     }
 
     addMonths(month){
-        let date = new Date(this.state.date.getTime())
+        let date = new Date(this.state.date.getTime());
         date.setMonth(this.state.date.getMonth() + month);
         this.setState({date: date});
     }
 
     constructor(props){
         super(props);
-        let date = new Date();
+        let date = normalizeDate(new Date());
         date.setDate(1);
         this.state = {
             date: date
@@ -76,22 +82,27 @@ class Calendar extends Component{
         let days = [];
         let date = new Date(this.state.date.getTime());
         let day = date.getDay();
+        let today = new Date();
 
         date.setDate((-12 - day) % 7);
 
         for(let i = 0; i < 7*6; i++){
-            let sichta = getSichta(date, 8, 1)
-            let active = date.getMonth() == this.state.date.getMonth() ? true: false;
-            days.push(<Day day={new Date(date.getTime())} sichta={sichty[sichta]} color={colors[sichta]} active={active}/>);
+            let sichta = getSichta(date, 8, 1);
+            let active = date.getMonth() === this.state.date.getMonth();
+            let isToday = today.getMonth() === date.getMonth() && date.getDate() === today.getDate() && today.getFullYear() === date.getFullYear();
+            days.push(<Day day={new Date(date.getTime())}
+                           sichta={sichty[sichta]}
+                           color={colors[sichta]}
+                           active={active}
+                           highlight={isToday}
+                      />);
             date.setTime(date.getTime() + 1000 * 3600 * 24);
         }
-
-
 
         return (
             <div className="Calendar">
                 <p>
-                    <div class="button">
+                    <div className="button">
                         <Button className={this.props.button} color="primary" onClick={() => {this.prevMonth()}}>Předchozí</Button>
                     </div>
 
@@ -107,7 +118,6 @@ class Calendar extends Component{
 
             </div>
         )
-
     }
 }
 
