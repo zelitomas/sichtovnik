@@ -36,7 +36,7 @@
       "src": "icons/res/mipmap-xxxhdpi/ic_launcher.png",
       "sizes": "192x192",
       "type": "image/png"
-    },
+    }
     
   ],
   "start_url": "./index.html",
