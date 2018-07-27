@@ -14,7 +14,6 @@
                          "content"
                          ".";
     height: 3em;
-    /*box-shadow: 1px 1px 16px 0px rgba(0,0,0,0.5);*/
     transition: all 0.3s;
     background-color: aliceblue;
 
@@ -39,7 +38,7 @@
 
 .Day.disabled{
     background-color: #fafafa;
-    color: #7f8c8d;
+    /*color: #7f8c8d;*/
     border-color: #fafafa;
     box-shadow: none;
     position: relative;
