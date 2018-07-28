@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+    text-align: center;
+    width: 95%;
+    max-width: 600px;
+    margin: auto;
 }
 .Day {
     --color: #27ae60;
@@ -73,11 +76,7 @@
 }
 
 .MonthCalendar{
-    width: 95%;
-    max-width: 600px;
     display: grid;
-    margin: auto;
-
     grid-template-columns: repeat(7, auto);
 }
 
@@ -90,4 +89,8 @@
     font-weight: 500;
     font-size: 1.5em;
     color: #2980b9;
+}
+
+.Select {
+    text-align: left;
 }
