@@ -4,6 +4,8 @@ import ListItem from '@material-ui/core/ListItem';
 import Day from './Day';
 import {getSichta, normalizeDate} from "./commonFunctions";
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import wavingHandImg from './img/wavingHand.svg';
 
 import React, { Component } from 'react';
 
@@ -25,6 +27,13 @@ class WelcomeDialog extends Component {
         let today = normalizeDate(new Date());
         return (
             <Dialog onClose={this.handleClose} open={this.props.open}>
+                <div className={this.props.classes.welcomeDialog}>
+                    <Typography className={this.props.classes.welcomeHeading} variant="display2" gutterBottom>
+                        Ahoj!
+                    </Typography>
+                    <img src={wavingHandImg} className="bigImage"/>
+                    <p>Na které šichtě děláš?</p>
+                </div>
                 <List>
                     {this.props.shifts.map(value => {
                         let sichta = getSichta(today, value.days, value.offset);
@@ -49,6 +58,12 @@ const style = theme => ({
     },
     day: {
         "min-width": "4em"
+    },
+    welcomeDialog: {
+        "text-align": "center"
+    },
+    welcomeHeading: {
+        "margin-top": theme.spacing.unit * 2
     }
 
 });
