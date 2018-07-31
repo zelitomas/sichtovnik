@@ -9,6 +9,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
+import Day from './Day';
+import UP from './UserPreferences';
+import WelcomeDialog from './WelcomeDialog';
+
+import {getSichta, normalizeDate} from "./commonFunctions";
 
 const theme = createMuiTheme({
     palette: {
@@ -23,42 +28,6 @@ const styles = theme => ({
 
     }
 });
-
-class Day extends Component {
-    render(){
-
-        let className = "Day";
-        if(!this.props.active) {
-            className = className + " disabled";
-        } else if (this.props.highlight) {
-            className = className + " highlight";
-        }
-
-        return(
-            <div className={className} style={{"--color": this.props.color}}>
-                <span className="DayNumber"> {this.props.day.getDate()}</span>
-                <span className="Shift">{this.props.sichta}</span>
-            </div>
-        );
-    }
-}
-
-function getSichta(date, days, offset){
-
-    let dayInWeek = Math.floor(date.getTime() / (1000 * 3600 * 24));
-    dayInWeek = (dayInWeek + offset) % days;
-    return dayInWeek;
-}
-
-function normalizeDate(date){
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-}
-
-//let colors = ["#27ae60", "#2ecc71", "#e67e22", "#f39c12", "#2c3e50", "#34495e", "#2980b9", "#3498db"];
-
-/*function daysInMonth (date) {
-    return new Date(date.getFullYear(), date.getMonth()+1, 0).getDate();
-}*/
 
 class Calendar extends Component{
 
@@ -150,24 +119,50 @@ const predefined = [
 
 class App extends Component {
 
-    state = {
-        sichtaSelected: predefined[0]
-    };
+
+
+    constructor(props){
+        super(props);
+        let savedShift = UP.getValue("savedShift", null);
+        let firstRun = false;
+        if(savedShift === null){
+            firstRun = true;
+            savedShift = predefined[0];
+        }
+
+        this.state = {
+            firstRun: firstRun,
+            sichtaSelected: savedShift,
+            savedShift: savedShift
+        };
+    }
 
     handleSichtaSelected = event => {
-        console.log(event);
         this.setState({
             sichtaSelected: event.target.value
         })
+
+
     };
 
-    static generateShiftMenuItems() {
+    generateShiftMenuItems = () => {
         let result = [];
+        result.push(<MenuItem value={this.state.savedShift}>Moje šichta <em>({this.state.savedShift.name})</em></MenuItem>);
         for(let i of predefined){
             result.push(<MenuItem value={i}>{i.name}</MenuItem>);
         }
         return result;
-    }
+    };
+
+    handleWelcomeDialogClose = value => {
+        if(!value){ return; }
+        this.setState({
+            sichtaSelected: value
+        });
+        UP.setValue("savedShift", value);
+        this.setState({firstRun: false, sichtaSelected: value, savedShift: value});
+
+    };
 
     render() {
         return (
@@ -182,6 +177,8 @@ class App extends Component {
                             scheme={this.state.sichtaSelected.scheme}
                         />
 
+                        <WelcomeDialog shifts={predefined} open={this.state.firstRun} onClose={this.handleWelcomeDialogClose}/>
+
                         <FormControl fullWidth={true} className={this.props.classes.formControl}>
                             <InputLabel htmlFor="sichtaSelect">Zobrazit směnu</InputLabel>
                             <Select
@@ -192,7 +189,7 @@ class App extends Component {
                                 }}
                                 className="Select"
                             >
-                                {App.generateShiftMenuItems()}
+                                {this.generateShiftMenuItems()}
                             </Select>
                         </FormControl>
                     </div>
@@ -201,8 +198,5 @@ class App extends Component {
         );
     }
 }
-
-
-
 
 export default withStyles(styles)(App);
