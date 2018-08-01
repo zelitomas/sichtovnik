@@ -29,6 +29,8 @@ const styles = theme => ({
     }
 });
 
+const dayNames = ["Po", "Út", "St", "Čt", "Pá", "So", "Ne"];
+
 class Calendar extends Component{
 
     nextMonth(){
@@ -61,7 +63,9 @@ class Calendar extends Component{
         let today = new Date();
 
         date.setDate((-12 - day) % 7);
-
+        let dayNameList = dayNames.map((val) =>{
+            return (<div className="dayName">{val}</div>);
+        });
         for(let i = 0; i < 7*6; i++){
             let sichta = getSichta(date, this.props.days, this.props.offset);
             let active = date.getMonth() === this.state.date.getMonth();
@@ -89,6 +93,7 @@ class Calendar extends Component{
                     </div>
                 </p>
                 <div className="MonthCalendar">
+                    {dayNameList}
                     {days}
                 </div>
 

@@ -98,3 +98,8 @@
 .bigImage {
     width: 40%;
 }
+
+.dayName {
+    margin: 0.5em;
+    color: rgba(0, 0, 0, 0.3);
+}
