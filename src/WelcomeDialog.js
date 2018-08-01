@@ -31,7 +31,7 @@ class WelcomeDialog extends Component {
                     <Typography className={this.props.classes.welcomeHeading} variant="display2" gutterBottom>
                         Ahoj!
                     </Typography>
-                    <img src={wavingHandImg} className="bigImage"/>
+                    <img src={wavingHandImg} className="bigImage" alt=""/>
                     <p>Na které šichtě děláš?</p>
                 </div>
                 <List>
