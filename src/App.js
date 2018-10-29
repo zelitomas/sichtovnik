@@ -14,11 +14,12 @@ import UP from './UserPreferences';
 import WelcomeDialog from './WelcomeDialog';
 
 import {getSichta, normalizeDate} from "./commonFunctions";
+import predefined from "./defaults.js";
 
 const theme = createMuiTheme({
     palette: {
-        primary: { main: '#2c3e50' }, // Purple and green play nicely together.
-        secondary: { main: '#2980b9' }, // This is just green.A700 as hex.
+        primary: { main: '#2c3e50' },
+        secondary: { main: '#2980b9' },
     },
 });
 
@@ -79,6 +80,7 @@ class Calendar extends Component{
             date.setTime(date.getTime() + 1000 * 3600 * 24);
         }
 
+
         return (
             <div className="Calendar">
                 <p>
@@ -102,29 +104,8 @@ class Calendar extends Component{
     }
 }
 
-const commonNames = {
-    "3shift": {
-        colors: ["#27ae60", "#27ae60", "#e67e22", "#e67e22", "#2c3e50", "#2c3e50", "#2980b9", "#2980b9"],
-        names: ["R", "R", "O", "O", "N", "N", "-", "-"]
-    },
-    "3shift-all": {
-        colors: ["#27ae60", "#27ae60", "#e67e22", "#e67e22", "#2c3e50", "#2c3e50", "#2980b9", "#2980b9"],
-        names: ["ABC", "ABC", "DAB", "DAB", "CDA", "CDA", "BCD", "BCD"]
-    }
-};
-
-const predefined = [
-    { name: "Železárny A", days: 8, offset: 1, scheme: commonNames["3shift"] },
-    { name: "Železárny B", days: 8, offset: 3, scheme: commonNames["3shift"] },
-    { name: "Železárny C", days: 8, offset: 5, scheme: commonNames["3shift"] },
-    { name: "Železárny D", days: 8, offset: 7, scheme: commonNames["3shift"] },
-    { name: "Železárny souhrn (zatím nefunkční!)", days: 8, offset: 1, scheme: commonNames["3shift-all"] },
-];
-
 
 class App extends Component {
-
-
 
     constructor(props){
         super(props);
