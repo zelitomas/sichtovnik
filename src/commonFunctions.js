@@ -6,7 +6,7 @@ export function getSichta(date, days, offset){
 }
 
 export function normalizeDate(date){
-    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 11));
 }
 
 export function daysInMonth (date) {
