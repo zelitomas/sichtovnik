@@ -4,10 +4,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 import TopBar from './TopBar';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 import Day from './Day';
 import UP from './UserPreferences';
@@ -15,6 +11,7 @@ import WelcomeDialog from './WelcomeDialog';
 
 import {getSichta, normalizeDate} from "./commonFunctions";
 import predefined from "./defaults.js";
+import AppDrawer from "./Drawer";
 
 const theme = createMuiTheme({
     palette: {
@@ -119,26 +116,17 @@ class App extends Component {
         this.state = {
             firstRun: firstRun,
             sichtaSelected: savedShift,
-            savedShift: savedShift
+            savedShift: savedShift,
+            drawerOpen: false,
         };
     }
 
-    handleSichtaSelected = event => {
+    handleShiftChanged = shift => {
         this.setState({
-            sichtaSelected: event.target.value
-        })
-
-
+            sichtaSelected: shift
+        });
     };
 
-    generateShiftMenuItems = () => {
-        let result = [];
-        result.push(<MenuItem value={this.state.savedShift}>Moje šichta <em>({this.state.savedShift.name})</em></MenuItem>);
-        for(let i of predefined){
-            result.push(<MenuItem value={i}>{i.name}</MenuItem>);
-        }
-        return result;
-    };
 
     handleWelcomeDialogClose = value => {
         if(!value){ return; }
@@ -150,34 +138,39 @@ class App extends Component {
 
     };
 
+
+    toggleDrawer(isOpen) {
+        if(isOpen === undefined){
+            isOpen = !this.state.drawerOpen;
+        }
+        this.setState({drawerOpen: isOpen});
+    }
+
     render() {
         return (
             <React.Fragment>
                 <CssBaseline />
                 <MuiThemeProvider theme={theme}>
-                    <TopBar name="Šichtovník"/>
+                    <TopBar name={"Šichtovník - " + this.state.sichtaSelected.name} onMenuClick={() => {this.toggleDrawer()}}/>
+                    <AppDrawer
+                        open={this.state.drawerOpen}
+                        selectedShift={this.state.sichtaSelected}
+                        savedShift={this.state.savedShift}
+                        onShiftChange={this.handleShiftChanged}
+                        onClose={() => {this.toggleDrawer(false)}}
+                    />
                     <div className="App">
+
                         <Calendar
                             days={this.state.sichtaSelected.days}
                             offset={this.state.sichtaSelected.offset}
                             scheme={this.state.sichtaSelected.scheme}
                         />
 
+
+
                         <WelcomeDialog shifts={predefined} open={this.state.firstRun} onClose={this.handleWelcomeDialogClose}/>
 
-                        <FormControl fullWidth={true} className={this.props.classes.formControl}>
-                            <InputLabel htmlFor="sichtaSelect">Zobrazit směnu</InputLabel>
-                            <Select
-                                value={this.state.sichtaSelected}
-                                onChange={this.handleSichtaSelected}
-                                inputProps={{
-                                    id: 'sichtaSelect',
-                                }}
-                                className="Select"
-                            >
-                                {this.generateShiftMenuItems()}
-                            </Select>
-                        </FormControl>
                     </div>
                 </MuiThemeProvider>
             </React.Fragment>

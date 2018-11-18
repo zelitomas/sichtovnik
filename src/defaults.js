@@ -17,7 +17,7 @@ if (process.env.REACT_APP_MODE === 'flat') {
      predefined = [
         { name: "Lukáš", days: 7*6, offset: 3 + 7, scheme: flatWork },
         { name: "Tomáš", days: 7*6, offset: 3 + 2 * 7, scheme: flatWork },
-        { name: "David Ninja Party Animal Průdek", days: 7*6, offset: 3 + 3 * 7, scheme: flatWork },
+        { name: "David", days: 7*6, offset: 3 + 3 * 7, scheme: flatWork },
         { name: "Dominik", days: 7*6, offset: 3 + 4 * 7, scheme: flatWork },
         { name: "Iza", days: 7*6, offset: 3 + 5 * 7, scheme: flatWork },
         { name: "Jakub", days: 7*6, offset: 3 + 6 * 7, scheme: flatWork },
