@@ -21,6 +21,10 @@ class UserPreferences {
     static setValue(key, value){
         localStorage.setItem(key, JSON.stringify(value));
     }
+
+    static nuke(){
+        localStorage.clear();
+    }
 }
 
 export default UserPreferences;

@@ -1,27 +1,32 @@
 import Drawer from '@material-ui/core/Drawer';
 import React, { Component } from 'react';
 import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
+import DeleteIcon from '@material-ui/icons/Delete';
 import predefined from "./defaults";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import UP from './UserPreferences';
 
 class AppDrawer extends Component{
 
     generateShiftListItems = () => {
         let result = [];
-        console.log(this.props.savedShift === this.props.selectedShift);
         result.push(
             <ListItem button
                       selected={true}
                       onClick={() => this.handleSichtaSelected(this.props.savedShift)}>
-                Moje šichta <em>({this.props.savedShift.name})</em>
+                <ListItemText>Moje šichta <em>({this.props.savedShift.name})</em></ListItemText>
             </ListItem>
         );
+        result.push(<Divider />);
         for(let i of predefined){
             result.push(
                 <ListItem button
                                   selected={i === this.props.selectedShift}
                                   onClick={() => this.handleSichtaSelected(i)}>
-                    {i.name}
+                    <ListItemText>{i.name}</ListItemText>
                 </ListItem>
             );
         }
@@ -33,10 +38,22 @@ class AppDrawer extends Component{
         this.props.onClose();
     };
 
+    // TODO: Refactor
+
+    nukeAndRefresh() {
+        UP.nuke();
+        window.location.reload(true);
+    }
+
     generateShiftList(){
         return (
             <List>
                 {this.generateShiftListItems()}
+                <Divider/>
+                <ListItem button onClick={() => {this.nukeAndRefresh()}}>
+                    <ListItemIcon><DeleteIcon/></ListItemIcon>
+                    <ListItemText>Smazat veškerá nastavení</ListItemText>
+                </ListItem>
             </List>
         )
     }

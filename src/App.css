@@ -103,3 +103,12 @@
     margin: 0.5em;
     color: rgba(0, 0, 0, 0.3);
 }
+
+.tip {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.tip svg{
+    vertical-align: middle;
+}

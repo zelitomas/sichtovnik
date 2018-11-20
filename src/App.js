@@ -8,10 +8,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Day from './Day';
 import UP from './UserPreferences';
 import WelcomeDialog from './WelcomeDialog';
+import Tip from './Tip.js';
 
 import {getSichta, normalizeDate} from "./commonFunctions";
 import predefined from "./defaults.js";
 import AppDrawer from "./Drawer";
+import {VERSION} from "./globals.js";
 
 const theme = createMuiTheme({
     palette: {
@@ -113,6 +115,12 @@ class App extends Component {
             savedShift = predefined[0];
         }
 
+        let lastVersion = UP.getValue("lastVersion", null);
+
+        // DO SOME STUFF
+
+        UP.setValue("lastVersion", VERSION);
+
         this.state = {
             firstRun: firstRun,
             sichtaSelected: savedShift,
@@ -151,7 +159,7 @@ class App extends Component {
             <React.Fragment>
                 <CssBaseline />
                 <MuiThemeProvider theme={theme}>
-                    <TopBar name={"Šichtovník - " + this.state.sichtaSelected.name} onMenuClick={() => {this.toggleDrawer()}}/>
+                    <TopBar name={/*"Šichtovník - " +*/ this.state.sichtaSelected.name} onMenuClick={() => {this.toggleDrawer()}}/>
                     <AppDrawer
                         open={this.state.drawerOpen}
                         selectedShift={this.state.sichtaSelected}
@@ -166,6 +174,9 @@ class App extends Component {
                             offset={this.state.sichtaSelected.offset}
                             scheme={this.state.sichtaSelected.scheme}
                         />
+
+                        <Tip />
+
 
 
 
