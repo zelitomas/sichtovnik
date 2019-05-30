@@ -1,5 +1,6 @@
 import {Component} from "react";
 import React from "react";
+import CzechHolidays from "./CzechHolidays.js";
 
 class Day extends Component {
     render(){
@@ -9,6 +10,10 @@ class Day extends Component {
             className = className + " disabled";
         } else if (this.props.highlight) {
             className = className + " highlight";
+        }
+
+        if(CzechHolidays.isHoliday(this.props.day)){
+            className = className + " holiday";
         }
 
         if(this.props.className){

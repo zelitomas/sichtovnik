@@ -4,6 +4,18 @@
     max-width: 600px;
     margin: auto;
 }
+
+.Day.holiday, .Day.holiday:hover, .Day.holiday.highlight{
+    --festive-color: #e74c3c;
+    background-color: var(--festive-color);
+    color: aliceblue;
+    border-color: var(--festive-color);
+ }
+
+.Day.holiday .DayNumber {
+    font-weight: bolder;
+}
+
 .Day {
     --color: #27ae60;
     position: relative;
@@ -21,7 +33,9 @@
     background-color: aliceblue;
     text-align: center;
     color: var(--color);
+    --shadow-color: rgba(0,0,0,0.5);
 }
+
 
 .Day:before {
     content: "";
@@ -31,7 +45,7 @@
     left: 0;
     right: 0;
     z-index: -1;
-    box-shadow: 1px 1px 16px 0 rgba(0,0,0,0.5);
+    box-shadow: 1px 1px 16px 0 var(--shadow-color);
 }
 
 
@@ -50,7 +64,6 @@
 
 .Day:hover, .Day.highlight{
     background-color: var(--color);
-
     color: aliceblue;
 }
 
