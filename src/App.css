@@ -36,7 +36,6 @@
     --shadow-color: rgba(0,0,0,0.5);
 }
 
-
 .Day:before {
     content: "";
     position: absolute;
@@ -125,3 +124,18 @@
 .tip svg{
     vertical-align: middle;
 }
+
+.changeMonth .smallButton{
+     display: none;
+ }
+
+@media (max-width: 380px) {
+    .changeMonth .smallButton{
+        display: inline-block;
+    }
+
+    .changeMonth .bigButton{
+        display: none;
+    }
+}
+

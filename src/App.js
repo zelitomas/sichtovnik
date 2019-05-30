@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import TopBar from './TopBar';
-import { withStyles } from '@material-ui/core/styles';
 import Day from './Day';
 import UP from './UserPreferences';
 import WelcomeDialog from './WelcomeDialog';
@@ -14,6 +14,8 @@ import {getSichta, normalizeDate} from "./commonFunctions";
 import predefined from "./defaults.js";
 import AppDrawer from "./Drawer";
 import {VERSION} from "./globals.js";
+import ArrowRight from '@material-ui/icons/ArrowForward';
+import ArrowLeft from '@material-ui/icons/ArrowBack';
 
 const theme = createMuiTheme({
     palette: {
@@ -83,14 +85,16 @@ class Calendar extends Component{
         return (
             <div className="Calendar">
                 <p>
-                    <div className="button">
-                        <Button className={this.props.button} color="primary" onClick={() => {this.prevMonth()}}>Předchozí</Button>
+                    <div className="button changeMonth">
+                        <IconButton className="smallButton" color="primary" onClick={() => {this.prevMonth() }}><ArrowLeft /></IconButton>
+                        <Button className="bigButton" color="primary" onClick={() => {this.prevMonth()}}>Předchozí</Button>
                     </div>
 
                     <span className="month">{this.state.date.getMonth() + 1}</span> / {this.state.date.getFullYear()}
 
-                    <div className="button">
-                        <Button className={this.props.button} color="primary" onClick={() => {this.nextMonth() }}>Následující</Button>
+                    <div className="button changeMonth">
+                        <Button className="bigButton" color="primary" onClick={() => {this.nextMonth() }}>Následující</Button>
+                        <IconButton className="smallButton" color="primary" onClick={() => {this.nextMonth() }}><ArrowRight /></IconButton>
                     </div>
                 </p>
                 <div className="MonthCalendar">
