@@ -37,6 +37,10 @@ if (process.env.REACT_APP_MODE === 'flat') {
             colors: ["#27ae60", "#27ae60", "#e67e22", "#e67e22", "#2c3e50", "#2c3e50", "#2980b9", "#2980b9"],
             names: ["ABC", "ABC", "DAB", "DAB", "CDA", "CDA", "BCD", "BCD"]
         },
+        "3shiftWithWeekens": {
+            colors: ["#27ae60", "#27ae60", "#27ae60", "#27ae60", "#27ae60", "#2980b9",  "#2980b9", "#e67e22", "#e67e22", "#2c3e50", "#2c3e50", "#2c3e50", "#2980b9", "#2980b9", "#2c3e50", "#2c3e50", "#e67e22", "#e67e22", "#e67e22", "#2980b9",  "#2980b9"],
+            names: ["R", "R", "R", "R", "R", "-",  "-", "O", "O", "N", "N", "N", "-", "-", "N", "N", "O", "O", "O", "-",  "-"]
+        },
 
     };
 
@@ -51,6 +55,9 @@ if (process.env.REACT_APP_MODE === 'flat') {
         { name: "Železárny B Bohumín", days: 8, offset: 3, scheme: commonNames["3shiftAlternative"] },
         { name: "Železárny C Bohumín", days: 8, offset: 5, scheme: commonNames["3shiftAlternative"] },
         { name: "Železárny D Bohumín", days: 8, offset: 7, scheme: commonNames["3shiftAlternative"] },
+        { name: "Železárny X Ostrava", days: 21, offset: 3, scheme: commonNames["3shiftWithWeekens"] },
+        { name: "Železárny Y Ostrava", days: 21, offset: 10, scheme: commonNames["3shiftWithWeekens"] },
+        { name: "Železárny Z Ostrava", days: 21, offset: 17, scheme: commonNames["3shiftWithWeekens"] },
         /*{ name: "Železárny souhrn (zatím nefunkční!)", days: 8, offset: 1, scheme: commonNames["3shift-all"] },*/
     ];
 }
