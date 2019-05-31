@@ -55,9 +55,9 @@ if (process.env.REACT_APP_MODE === 'flat') {
         { name: "Železárny B Bohumín", days: 8, offset: 3, scheme: commonNames["3shiftAlternative"] },
         { name: "Železárny C Bohumín", days: 8, offset: 5, scheme: commonNames["3shiftAlternative"] },
         { name: "Železárny D Bohumín", days: 8, offset: 7, scheme: commonNames["3shiftAlternative"] },
-        { name: "Železárny X Ostrava", days: 21, offset: 3, scheme: commonNames["3shiftWithWeekens"] },
-        { name: "Železárny Y Ostrava", days: 21, offset: 10, scheme: commonNames["3shiftWithWeekens"] },
-        { name: "Železárny Z Ostrava", days: 21, offset: 17, scheme: commonNames["3shiftWithWeekens"] },
+        { name: "Železárny A Ostrava", days: 21, offset: 17, scheme: commonNames["3shiftWithWeekens"] },
+        { name: "Železárny B Ostrava", days: 21, offset: 3, scheme: commonNames["3shiftWithWeekens"] },
+        { name: "Železárny C Ostrava", days: 21, offset: 10, scheme: commonNames["3shiftWithWeekens"] },
         /*{ name: "Železárny souhrn (zatím nefunkční!)", days: 8, offset: 1, scheme: commonNames["3shift-all"] },*/
     ];
 }
