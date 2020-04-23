@@ -26,4 +26,4 @@ yarn-error.log*
 #Cordova
 /plugins
 /www
-/platform
+/platforms

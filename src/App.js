@@ -119,8 +119,6 @@ class App extends Component {
             savedShift = predefined[0];
         }
 
-        let lastVersion = UP.getValue("lastVersion", null);
-
         // DO SOME STUFF
 
         UP.setValue("lastVersion", VERSION);
